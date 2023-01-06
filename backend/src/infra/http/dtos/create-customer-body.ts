@@ -1,10 +1,11 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
 export class CreateCustomerBody {
   @IsNotEmpty()
   address: string;
 
   @IsNotEmpty()
+  @Length(11)
   cpf: string;
 
   @IsNotEmpty()

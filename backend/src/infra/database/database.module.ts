@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
+import { CustomerRepository } from 'src/app/repositories/customer-repository';
 import { PrismaService } from './prisma/prisma.service';
+import { PrismaCustomerRepository } from './prisma/repositories/prisma-customer-repository';
 
 @Module({
   providers: [
     PrismaService,
-    // {
-    //   provide: NotificationsRepository,
-    //     useClass: PrismaNotificationsRepository,
-    // }
+    {
+      provide: CustomerRepository,
+      useClass: PrismaCustomerRepository,
+    },
   ],
-  // exports: NotificationsRepository
+  exports: [CustomerRepository],
 })
 export class DatabaseModule {}

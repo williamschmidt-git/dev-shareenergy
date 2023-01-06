@@ -2,7 +2,7 @@ import { ObjectId } from 'bson';
 import { Replace } from 'src/helpers/Replace';
 
 export interface CustomerData {
-  id?: ObjectId;
+  id?: string;
   address: string;
   cpf: string;
   phone_number: string;
@@ -22,12 +22,12 @@ export class Customer {
     // this._id = id ?? new ObjectId();
     this.props = {
       ...props,
-      id: props.id ?? new ObjectId(),
+      id: new ObjectId().toString(),
       created_at: props.created_at ?? new Date(),
     };
   }
 
-  public get id(): ObjectId {
+  public get id(): string {
     return this.props.id;
   }
 

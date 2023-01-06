@@ -3,7 +3,6 @@ import { Customer } from '../entities/customer';
 import { CustomerRepository } from '../repositories/customer-repository';
 
 interface CreateCustomerRequest {
-  customerId: string;
   email: string;
   phone_number: string;
   address: string;
