@@ -80,6 +80,7 @@ Esperamos de você duas entregas: o código no GitHub e um vídeo explicativo no
 
 ### Instruções
 
+
 - Faça um fork desse repositório.
 - Em seguida, crie uma branch, cujo nome é o seu nome completo, no seguinte formato: meu-nome-completo.
 - Resolva o desafio realizando versionamento local e remoto. Fique à vontade em criar outras branches durante o desenvolvimento do código.
