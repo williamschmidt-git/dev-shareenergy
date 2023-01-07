@@ -15,4 +15,14 @@ export class PrismaCustomerRepository implements CustomerRepository {
       data: rawData,
     });
   }
+
+  async findAll(): Promise<Customer[] | []> {
+    const customers = await this.prisma.customer.findMany();
+
+    if (customers.length === 0) {
+      return [];
+    }
+
+    return customers.map(PrismaCustomerMapper.toDomain);
+  }
 }
