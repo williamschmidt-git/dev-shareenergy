@@ -25,4 +25,20 @@ export class PrismaCustomerRepository implements CustomerRepository {
 
     return customers.map(PrismaCustomerMapper.toDomain);
   }
+
+  async findByEmail(email: string): Promise<Customer | null> {
+    const customer = await this.prisma.customer
+      .findUnique({
+        where: {
+          email,
+        },
+      })
+      .catch((err) => err);
+
+    if (customer.length === 0) {
+      return null;
+    }
+
+    return PrismaCustomerMapper.toDomain(customer);
+  }
 }
