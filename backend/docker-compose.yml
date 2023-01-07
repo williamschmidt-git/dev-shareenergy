@@ -1,23 +1,12 @@
-version: "3"
+version: '3'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: car_shop_db
-    volumes:
-      - ./:/app
-    restart: always
+  mongo:
+    container_name: mongo
+    image: mongo:4
+    command: --replSet rs0
     ports:
-      # Garanta que não haverá conflitos de porta com um mongodb que esteja
-      # rodando localmente
-      - 27017:27017
-    environment:
-      - DATABASE_URL='mongodb://mongodb:27017/Customers'
-
-# Lista de redes que os containeres irão utilizar
-networks:
-  # Rede padrão, criada automaticamente
-  default:
-    # Dá um nome específico à rede padrão
-    name: car_shop_nets
-  
+      - '27017:27017'
+      - '28017:28017'
+    volumes:
+      - ./data/mongo:/data/db
