@@ -21,9 +21,9 @@ export class FindCustomerByEmail {
     const { email } = request;
     const customer = await this.customerRepository.findByEmail(email);
 
-    // if (!customer) {
-    //   throw new CustomerNotFound();
-    // }
+    if (!customer) {
+      throw new CustomerNotFound();
+    }
 
     return { customer };
   }

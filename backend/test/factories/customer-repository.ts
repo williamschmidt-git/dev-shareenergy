@@ -6,7 +6,7 @@ export function makeCustomer(override: Override = {}) {
   return new Customer({
     address: 'rua1',
     cpf: '11111111111',
-    email: 'email@email',
+    email: 'email2@email2.com',
     phone_number: '99 9999-9999',
     ...override,
   });

@@ -3,27 +3,27 @@ import { InMemoryCustomerRepository } from '../../../test/repositories/in-memory
 import { CustomerNotFound } from './errors/customer-not.found';
 import { FindCustomerByEmail } from './find-customer-by-email';
 
-describe('Find Customer by id', () => {
-  it('should be able to find Customer by id', async () => {
+describe('Find Customer by email', () => {
+  it('should be able to find Customer by email', async () => {
     const customerRepository = new InMemoryCustomerRepository();
     const findCustomerByEmail = new FindCustomerByEmail(customerRepository);
 
     const customer = makeCustomer();
 
-    customerRepository.create(customer);
+    await customerRepository.create(customer);
 
     const foundCustomer = await findCustomerByEmail.execute({
       email: customer.email,
     });
 
-    expect(foundCustomer).toHaveProperty('customer.props.id');
+    expect(foundCustomer).toHaveProperty('customer.props.email');
   });
 
-  it('should not be able to find Customer by id', async () => {
+  it('should not be able to find Customer by email', async () => {
     const customerRepository = new InMemoryCustomerRepository();
     const findCustomerByEmail = new FindCustomerByEmail(customerRepository);
 
-    const email = 'blablablablablalba';
+    const email = ' ';
 
     expect(() => {
       return findCustomerByEmail.execute({
