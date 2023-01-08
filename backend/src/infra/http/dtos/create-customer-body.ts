@@ -12,6 +12,7 @@ export class CreateCustomerBody {
   phone_number: string;
 
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 }
 

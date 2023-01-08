@@ -41,4 +41,23 @@ export class PrismaCustomerRepository implements CustomerRepository {
 
     return PrismaCustomerMapper.toDomain(customer);
   }
+
+  async update(key: string, customer: Customer): Promise<void> {
+    await this.prisma.customer.update({
+      where: {
+        email: key,
+      },
+      data: {
+        ...customer,
+      },
+    });
+  }
+
+  async delete(email: string): Promise<void> {
+    await this.prisma.customer.delete({
+      where: {
+        email,
+      },
+    });
+  }
 }

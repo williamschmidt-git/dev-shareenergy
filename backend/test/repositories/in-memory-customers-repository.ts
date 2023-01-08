@@ -1,4 +1,4 @@
-import { Customer } from '../../src/app/entities/customer';
+import { Customer, CustomerData } from '../../src/app/entities/customer';
 import { CustomerRepository } from 'src/app/repositories/customer-repository';
 
 export class InMemoryCustomerRepository implements CustomerRepository {
@@ -21,5 +21,14 @@ export class InMemoryCustomerRepository implements CustomerRepository {
     const customer = this.customers.filter((e) => e.id === id);
 
     this.customers.splice(this.customers.indexOf(customer[0]), 1);
+  }
+
+  async update(key: string, customer: Customer): Promise<void> {
+    const customerToUpdate = this.customers.find((e) => e.email === key);
+    customerToUpdate['address'] = customer.address;
+    customerToUpdate['cpf'] = customer.cpf;
+    customerToUpdate['email'] = customer.email;
+    customerToUpdate['phone_number'] = customer.phone_number;
+    customerToUpdate.update();
   }
 }
