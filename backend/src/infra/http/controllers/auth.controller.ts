@@ -7,7 +7,6 @@ export class AuthController {
 
   @Post('auth/login')
   async login(@Body() body) {
-    console.log(body);
     return this.authService.validateUser(body);
   }
 }

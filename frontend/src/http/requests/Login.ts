@@ -28,5 +28,6 @@ export const login = async(body: LoginBody) => {
     }
   });
 
-  return response.json();
+  // console.log(await response.json())
+  return await response.json();
 }
