@@ -1,9 +1,14 @@
-import { createContext, Dispatch, SetStateAction } from "react";
-import { GlobalStateInterface } from "../@types/user";
+import { createContext} from "react";
+import { PropsUserContext } from "../@types/user";
 
-const Context = createContext({
-  state: {} as Partial<GlobalStateInterface>,
-  setState: {} as Dispatch<SetStateAction<Partial<GlobalStateInterface>>>
-})
+export const DEFAULT_VALUE = {
+  state: {
+    username: '',
+    password: ''
+  },
+  setState: () => {}
+}
+
+const Context = createContext<PropsUserContext>(DEFAULT_VALUE)
 
 export default Context;

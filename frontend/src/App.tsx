@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Provider } from './context/provider/provider'
 import Customers from './pages/Customers'
 import HTTPCats from './pages/HTTPCats'
 import Login from './pages/Login'

@@ -1,30 +1,22 @@
-import { useContext, useState } from "react";
-import { GlobalStateInterface } from "../../@types/user";
-import Context from "../context";
+import { useState } from "react"
+import Context, { DEFAULT_VALUE } from "../context"
 
-const Provider = ({
-  children,
-  value = {} as GlobalStateInterface,
-}: {
-  children: React.ReactNode;
-  value?: Partial<GlobalStateInterface>;
-}) => {
-  const [state, setState] = useState(value);
+interface Props {
+  children: React.ReactNode
+}
 
-  return(
-    <Context.Provider value={{ state, setState}}>
-      {children}
+const ContextProvider: React.FC<Props> = ({children} : Props) => {
+  const [state, setState] = useState(DEFAULT_VALUE.state)
+
+  return (
+    <Context.Provider value={{
+      state,
+      setState
+      }}
+    >
+      { children }
     </Context.Provider>
-  )
-}
+  );
+};
 
-const useGlobalState = () => {
-  const context = useContext(Context);
-  if(!context) {
-    throw new Error("GlobalState must be used within a GlobalContext");
-  }
-
-  return context;
-}
-
-export { Provider, useGlobalState }
+export { ContextProvider };
