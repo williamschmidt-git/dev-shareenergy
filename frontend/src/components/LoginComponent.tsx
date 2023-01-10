@@ -1,4 +1,8 @@
+import { redirect } from 'react-router-dom'
+import { useGlobalState} from '../context/provider/provider'
+
 export default function LoginComponent() {
+  const { setState } = useGlobalState();
   return (
     <div className="bg-gray-200 h-screen">
       <div className="pt-44 mb-8">
@@ -11,7 +15,7 @@ export default function LoginComponent() {
           <div className="mb-3">
             <label htmlFor="username" className="text-sm text-gray-600">
               Username:
-              <input type="text" className="block border rounded w-full py-1 px-2" />
+              <input type="text" className="block border rounded w-full py-1 px-2" placeholder="admin"/>
             </label>
           </div>
           
