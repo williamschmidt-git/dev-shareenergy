@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Context from '../context/context';
+import { login } from '../http/requests/Login';
 
 export default function LoginComponent() {
   const[username, setUserName] = useState<string>("");
@@ -9,17 +10,16 @@ export default function LoginComponent() {
 
   const { state, setState: setGlobalState } = useContext(Context)
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setGlobalState({
       username,
       password
     })
 
-    navigate('/main')
-  }
 
-  console.log(state)
+    await login({ username, password })
+  }
 
   return (
     <div className="bg-gray-200 h-screen">
