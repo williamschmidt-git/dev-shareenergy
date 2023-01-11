@@ -9,19 +9,32 @@ export default function LoginComponent() {
   const[isChecked, setIsChecked] = useState<boolean>(false);
   const[isLoginSuccessful, setIsLoginSuccessful] = useState<boolean>(false);
   const[token, setToken] = useState<string>("");
+  const[isTokenValid, setIsTokenValid] = useState<boolean>(false)
 
   const navigate = useNavigate();
 
   const { state, setState: setGlobalState } = useContext(Context);
 
-  function onChangeCheckbox(e: any) {
-    setIsChecked(e.target.checked)
-  }
+  useEffect(() => {
+    validateToken()
+  }, [])
 
   useEffect(() => {
     toNavigate(token)
   }, [isLoginSuccessful])
-  
+
+  function validateToken(): void {
+    const tokenValidator = document.cookie.split('=')[1];
+    if(tokenValidator) {
+      setIsTokenValid(true)
+      navigate('/main')
+    }
+  }
+
+  function onChangeCheckbox(e: any) {
+    setIsChecked(e.target.checked)
+  }
+
   function createSessionExpireDate(token: string) {
     // document.cookie = "username=Max Brown; expires=Wed, 05 Aug 2020 23:00:00 UTC";
     const now = new Date();
