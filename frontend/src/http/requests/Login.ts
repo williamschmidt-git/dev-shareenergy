@@ -11,12 +11,6 @@ export const login = async(body: LoginBody) => {
     password: body.password
   })
 
-  let requestOptions = {
-    method: 'POST',
-    body: raw,
-    redirect: 'follow'
-  };
-
   const response = await fetch(`${endpoint}auth/login`, {
     
     method: 'POST',

@@ -36,7 +36,6 @@ export default function LoginComponent() {
   }
 
   function createSessionExpireDate(token: string) {
-    // document.cookie = "username=Max Brown; expires=Wed, 05 Aug 2020 23:00:00 UTC";
     const now = new Date();
     now.setDate(now.getDate() + 7)
 
@@ -63,23 +62,12 @@ export default function LoginComponent() {
 
     const { access_token } = await login({ username, password });
 
-    // console.log(access_token)
-
     if (access_token) {
       setToken(access_token)
       setIsLoginSuccessful(true)
     }
 
     toNavigate(access_token)
-
-    // if(isLoginSuccessful) {
-    //   navigate('/main')
-    // }
-
-    // console.log(`
-    // LOGINSUCESSFUL ${isLoginSuccessful}
-    // ISCHEKED ${isChecked}
-    // ` )
   }
 
   return (
@@ -87,7 +75,6 @@ export default function LoginComponent() {
       <div className="pt-44 mb-8">
         <h1 className="text-center text-3xl font-bold text-gray-700">Sign in to your account</h1>
       </div>
-      
 
       <div className="bg-white max-w-lg rounded-lg mx-auto p-10 shadow-lg">
         <form onSubmit={handleSubmit}>
@@ -102,7 +89,7 @@ export default function LoginComponent() {
                 />
             </label>
           </div>
-          
+
           <div className="mb-3">
             <label htmlFor="password" className="text-sm text-gray-600">
                 Password:
@@ -120,7 +107,6 @@ export default function LoginComponent() {
                 Remember me
               </label>
           </div>
-
             <button className="bg-indigo-600 px-4 py-2 rounded-lg text-white font-medium w-1/2 mx-auto flex align-middle justify-center"
             type="submit">
               Sign in
