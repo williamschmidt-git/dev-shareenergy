@@ -14,7 +14,7 @@ export default function MainComponent() {
   const [mounted, setMounted] = useState<boolean>(true);
 
   const requestApi = async () => {
-    const response = await getRandomUser(5)
+    const response = await getRandomUser(9)
     setUsers(response);
   }
 
@@ -31,7 +31,7 @@ export default function MainComponent() {
   // }, [users])
 
   return (
-    <div className="bg-gray-200 h-max">
+    <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center">
       <h1 className="font-roboto text-center text-4xl pt-14 text-gray-700 mb-4">RANDOM USER GENERATOR</h1>
 
       <div className="flex justify-center rounded-lg">
@@ -40,32 +40,33 @@ export default function MainComponent() {
         </label>
       </div>
 
-      <div className="flex flex-col flex-wrap">
+      <div className="flex flex-wrap w-auto justify-center">
       {users.map((e) => {
         return (
-        <div className="bg-slate-50 w-1/4 rounded-lg mb-2 shadow-sm px-3 py-2 mx-auto ">
+        <div className="bg-slate-50 w-1/4 rounded-lg mb-2 shadow-sm px-3 py-2 mx-1">
+
+          <img src={e.picture}  className="rounded-full pb-1 mx-auto" />
+
           <div
-          className="font-extrabold text-2xl text-gray-700 pb-1"
+          className="font-extrabold text-2xl text-gray-700 pb-1 text-center"
           key={ e.username }>
             { e.username }
           </div>
 
-          <img src={e.picture}  className="rounded-full pb-1" />
-
           <div
-          className="font-medium text-gray-700 pb-1"
+          className="font-medium text-gray-700 pb-1 text-center"
           key={ e.fullName }>
             { e.fullName }
           </div>
 
           <div
-          className="font-medium text-gray-700 pb-1"
+          className="font-medium text-gray-700 pb-1 text-center"
           key={ e.age }>
             { `${e.age} years`}
           </div>
 
           <div
-          className="font-extralight text-gray-700"
+          className="font-extralight text-gray-700 text-center"
           key={ e.email }>
             { `${e.email}`}
           </div>
