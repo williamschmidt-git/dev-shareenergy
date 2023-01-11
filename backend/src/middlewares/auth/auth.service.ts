@@ -42,4 +42,14 @@ export class AuthService {
       ),
     };
   }
+
+  async authorization(token: string) {
+    if (!token) throw new Error('Token not found.');
+
+    if (token) {
+      return this.jwtService.verify(token, { secret: 'SECRET' });
+    }
+
+    throw new Error('Invalid access token.');
+  }
 }

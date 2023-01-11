@@ -18,6 +18,7 @@ export const login = async(body: LoginBody) => {
   };
 
   const response = await fetch(`${endpoint}auth/login`, {
+    
     method: 'POST',
     body: raw,
     mode: "cors",
@@ -28,6 +29,5 @@ export const login = async(body: LoginBody) => {
     }
   });
 
-  // console.log(await response.json())
   return await response.json();
 }
