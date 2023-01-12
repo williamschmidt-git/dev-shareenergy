@@ -1,4 +1,3 @@
-import { SearchFormat } from "../../components/MainComponent";
 import formatRandomUsers from "../../utils/formatRandomUsers";
 
 export const RANDOM_USER_URI = "https://randomuser.me/api/"
