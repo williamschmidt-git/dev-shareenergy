@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import getRandomUser from "../http/requests/RandomUsers";
-import checkSearchBar from "../utils/check-search-bar";
 
 export interface FormattedRandomUser {
   picture: string
@@ -10,15 +10,11 @@ export interface FormattedRandomUser {
   age: number;
 }
 
-export enum SearchFormat {
-  EMAIL = 'email',
-  USERNAME = 'username',
-  NAME = 'name'
-}
-
 export default function MainComponent() {
   const [users, setUsers] = useState<FormattedRandomUser[]>([]);
   const [searchBar, setSearchBar] = useState<string>("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if(users.length === 0) requestApi();
@@ -43,17 +39,54 @@ export default function MainComponent() {
     });
   }
 
+  const handleClick = (e: React.MouseEvent) => {
+    switch(e.currentTarget.textContent) {
+      case 'RANDOM USER': 
+        return navigate('/main');
+
+      case 'HTTP CAT': 
+        return navigate('/httpcats');
+
+      case 'RANDOM DOG': 
+        return navigate('/random-dog');
+
+      case 'CUSTOMERS': 
+        return navigate('/customers');
+
+      default:
+        return navigate(window.location.pathname)
+    }
+  }
+
   return (
     <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center">
       <ul className="flex bg-indigo-600">
         <li>
-          <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">RANDOM USER</button>
+          <button
+          className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out"
+          onClick={handleClick}
+          >RANDOM USER</button>
         </li>
+
         <li>
-        <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">HTTP CAT</button>
+        <button
+        className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out"
+        onClick={handleClick}
+        >HTTP CAT</button>
         </li>
+
         <li>
-        <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">RANDOM DOG</button>
+        <button
+        className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out"
+        onClick={handleClick}
+        >RANDOM DOG</button>
+        </li>
+
+        <li>
+        <button
+        className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out"
+        onClick={handleClick}
+        >CUSTOMERS</button>
         </li>
       </ul>
       <h1 className="font-roboto text-center text-4xl pt-14 text-gray-700 mb-4">RANDOM USER GENERATOR</h1>
