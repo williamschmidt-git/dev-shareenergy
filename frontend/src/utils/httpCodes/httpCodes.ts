@@ -63,6 +63,12 @@ enum HttpStatusCode {
     NO_CONTENT = 204,
 
     /**
+     * The server successfully processed the request, but is not returning any content.
+     * Unlike a 204 response, this response requires that the requester reset the document view.
+     */
+    RESET_CONTENT = 205,
+
+    /**
      * The server is delivering only part of the resource (byte serving) due to a range header sent by the client.
      * The range header is used by HTTP clients to enable resuming of interrupted downloads,
      * or split a download into multiple simultaneous streams.
@@ -74,6 +80,18 @@ enum HttpStatusCode {
      * depending on how many sub-requests were made.
      */
     MULTI_STATUS = 207,
+
+     /**
+     * The members of a DAV binding have already been enumerated in a preceding part of the (multistatus) response,
+     * and are not being included again.
+     */
+     ALREADY_REPORTED = 208,
+
+     /**
+     * The server has fulfilled a request for the resource,
+     * and the response is a representation of the result of one or more instance-manipulations applied to the current instance.
+     */
+    IM_USED = 226,
 
     /**
      * Indicates multiple options for the resource from which the client may choose (via agent-driven content negotiation).
@@ -281,6 +299,14 @@ enum HttpStatusCode {
     UPGRADE_REQUIRED = 426,
 
     /**
+     * The origin server requires the request to be conditional.
+     * Intended to prevent "the 'lost update' problem, where a client
+     * GETs a resource's state, modifies it, and PUTs it back to the server,
+     * when meanwhile a third party has modified the state on the server, leading to a conflict."
+     */
+    PRECONDITION_REQUIRED = 428,
+
+    /**
      * The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes.
      */
     TOO_MANY_REQUESTS = 429,
@@ -333,6 +359,11 @@ enum HttpStatusCode {
      * The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
      */
     GATEWAY_TIMEOUT = 504,
+
+    /**
+     * The server does not support the HTTP protocol version used in the request
+     */
+    HTTP_VERSION_NOT_SUPPORTED = 505,
 
     /**
      * Transparent content negotiation for the request results in a circular reference.
