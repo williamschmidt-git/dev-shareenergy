@@ -5,7 +5,12 @@ import HeaderComponent from "./HeaderComponent";
 export default function HTTPCatsComponent() {
   const [statusCode, setStatusCode] = useState<string>("");
   const [formatedStatusCode, setFormatedStatusCode] = useState<string>("")
-  const [isCodeValid, setIsCodeValid] = useState<boolean>()
+  const [isCodeValid, setIsCodeValid] = useState<boolean>();
+  const [isRendered, setIsRendered] = useState<boolean>(false)
+
+  useEffect(() => {
+    checkIfCodeExists();
+  }, [statusCode])
 
   const all_codes = Object.entries(HttpStatusCode).map(([key, value]) => ({
     key, value
@@ -16,21 +21,20 @@ export default function HTTPCatsComponent() {
       return code.key === statusCode
     })
 
-    if(check) setIsCodeValid(true)
+    if(check) {
+      setIsCodeValid(true)
+    } else {
+      setIsCodeValid(false)
+    }
+
   }
 
   const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
 
-    checkIfCodeExists()
-
     setStatusCode(formatedStatusCode)
+    setIsRendered(true)
   }
-
-
-  // const handleClick = () => {
-  //   return `https://http.cat/${statusCode}`
-  // }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!isNaN(Number(e.target.value))) setFormatedStatusCode(e.target.value)
@@ -51,10 +55,12 @@ export default function HTTPCatsComponent() {
         </label>
 
         {isCodeValid ? (
-          <img src={`https://http.cat/${statusCode}`} className="rounded-lg object-scale-down"></img>
+          <img src={`https://http.cat/${statusCode}`} className="rounded-lg "></img>
         ) : (<></>)}
+        {
+          isRendered === true && !isCodeValid? (<img src='../../imgs/dog.jpg' className="rounded-lg "></img>) : (<></>)
+        }
       </form>
-
 
     </div>
   )
