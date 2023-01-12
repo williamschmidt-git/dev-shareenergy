@@ -1,8 +1,9 @@
+import { SearchFormat } from "../../components/MainComponent";
 import formatRandomUsers from "../../utils/formatRandomUsers";
 
 export const RANDOM_USER_URI = "https://randomuser.me/api/"
 
-export const getRandomUser = async (numberOfRequests: number) => {
+export default async function getRandomUser (numberOfRequests: number)  {
   const response = await fetch(`${RANDOM_USER_URI}?results=${numberOfRequests}`, {
     method: 'GET',
     mode: "cors",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getRandomUser } from "../http/requests/RandomUsers";
+import getRandomUser from "../http/requests/RandomUsers";
+import checkSearchBar from "../utils/check-search-bar";
 
 export interface FormattedRandomUser {
   picture: string
@@ -9,26 +10,38 @@ export interface FormattedRandomUser {
   age: number;
 }
 
+export enum SearchFormat {
+  EMAIL = 'email',
+  USERNAME = 'username',
+  NAME = 'name'
+}
+
 export default function MainComponent() {
-  const [users, setUsers] = useState<FormattedRandomUser[]>([])
-  const [mounted, setMounted] = useState<boolean>(true);
+  const [users, setUsers] = useState<FormattedRandomUser[]>([]);
+  const [searchBar, setSearchBar] = useState<string>("");
+
+  useEffect(() => {
+    if(users.length === 0) requestApi();
+  })
 
   const requestApi = async () => {
     const response = await getRandomUser(9)
     setUsers(response);
   }
 
-  useEffect(() => {
-    if(users.length < 1) requestApi();
-  })
+  const filterUsers = (users: FormattedRandomUser[]) => {
+    return users.filter((user) => {
+      if(searchBar.includes('@')) {
+        return user.email.toLowerCase().includes(searchBar.toLowerCase())
+      }
+      
+      if(/\d/.test(searchBar.toLocaleLowerCase())) {
+        return user.username.toLowerCase().includes(searchBar.toLowerCase())
+      }
 
-  // useEffect(() => {
-  //   getRandomUser(5).then(items => {
-  //     if(mounted) setUsers(items)
-  //   })
-
-  //   return () => setMounted(false)
-  // }, [users])
+      return user.fullName.toLowerCase().includes(searchBar.toLowerCase())
+    });
+  }
 
   return (
     <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center">
@@ -36,14 +49,24 @@ export default function MainComponent() {
 
       <div className="flex justify-center rounded-lg">
         <label htmlFor="search-bar">
-          <input placeholder="email, username or name" className=" rounded-md mb-2 text-center"></input>
+          <input placeholder="email, username or name" className=" rounded-md mb-2 text-center"
+          type='search'
+          value={searchBar}
+          name="searchBar"
+          onChange={(e) => {
+            setSearchBar(e.target.value)
+          }}
+          ></input>
         </label>
+        <button className=" ml-1 bg-indigo-600 px-3 h-6 rounded-lg text-white font-medium shadow-md"
+        // onClick={handleClick}
+        type="button">search</button>
       </div>
 
       <div className="flex flex-wrap w-auto justify-center">
-      {users.map((e) => {
+      {filterUsers(users).map((e) => {
         return (
-        <div className="bg-slate-50 w-1/4 rounded-lg mb-2 shadow-sm px-3 py-2 mx-1">
+        <div key={ e.username } className="bg-slate-50 w-1/4 rounded-lg mb-2 shadow-sm px-3 py-2 mx-1">
 
           <img src={e.picture}  className="rounded-full pb-1 mx-auto" />
 
@@ -73,7 +96,6 @@ export default function MainComponent() {
         </div>)
       })}
       </div>
-      
     </div>
   )
 }
