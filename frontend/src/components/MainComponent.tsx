@@ -45,6 +45,17 @@ export default function MainComponent() {
 
   return (
     <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center">
+      <ul className="flex bg-indigo-600">
+        <li>
+          <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">RANDOM USER</button>
+        </li>
+        <li>
+        <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">HTTP CAT</button>
+        </li>
+        <li>
+        <button className="text-white font-roboto text-xl p-4 hover:scale-[1.02] transition ease-in-out">RANDOM DOG</button>
+        </li>
+      </ul>
       <h1 className="font-roboto text-center text-4xl pt-14 text-gray-700 mb-4">RANDOM USER GENERATOR</h1>
 
       <div className="flex justify-center rounded-lg">
