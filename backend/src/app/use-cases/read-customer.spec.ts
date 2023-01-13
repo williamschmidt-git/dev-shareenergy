@@ -13,6 +13,7 @@ describe('Read Customers', () => {
       cpf: '11111111111',
       email: 'email@email',
       phone_number: '99 9999-9999',
+      name: 'namename',
     });
 
     await createCustomer.execute({
@@ -20,6 +21,7 @@ describe('Read Customers', () => {
       cpf: '22222222222',
       email: 'email@email',
       phone_number: '99 9999-9990',
+      name: 'namename2',
     });
 
     const { customers } = await readCustomer.execute();
