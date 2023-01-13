@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
-import { ContextProvider } from './context/provider/provider'
+import { UserProvider } from './context/provider/user'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
-    <ContextProvider>
+    <UserProvider>
       <App />
-    </ContextProvider>
+    </UserProvider>
   </BrowserRouter>
 )

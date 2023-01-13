@@ -1,22 +1,22 @@
 import { useState } from "react"
-import Context, { DEFAULT_VALUE } from "../context"
+import UserContext, { DEFAULT_VALUE}  from "../../user";
 
 interface Props {
   children: React.ReactNode
 }
 
-const ContextProvider: React.FC<Props> = ({children} : Props) => {
+const UserProvider: React.FC<Props> = ({children} : Props) => {
   const [state, setState] = useState(DEFAULT_VALUE.state)
 
   return (
-    <Context.Provider value={{
+    <UserContext.Provider value={{
       state,
       setState
       }}
     >
       { children }
-    </Context.Provider>
+    </UserContext.Provider>
   );
 };
 
-export { ContextProvider };
+export { UserProvider };

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Context from '../context/context';
+import Context from '../context/user/index';
 import { login } from '../http/requests/Login';
 
 export default function LoginComponent() {
