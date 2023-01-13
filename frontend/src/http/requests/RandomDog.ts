@@ -1,16 +1,10 @@
-const RANDOM_DOG_URI = "https://random.dog/woof.json"
+import axios from "axios"
+
+const RANDOM_DOG_URI = "https://random.dog/"
 
 export default async function getRandomDog ()  {
-  const response = await fetch(`${RANDOM_DOG_URI}`, {
-    method: 'GET',
-    // mode: "no-cors",
-    redirect: 'follow',
-    headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    }
-  });
+  const response = await axios.get(`${RANDOM_DOG_URI}woof.json?filter=mp4,webm,gif`)
 
-  const result  = await response.json()
-  console.log(await result)
+  const teste = await response.data
+  return teste.url;
 }
