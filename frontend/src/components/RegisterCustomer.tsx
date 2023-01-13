@@ -19,7 +19,7 @@ export default function RegisterFunction() {
   const [cpf, setCpf] = useState<string>("");
   const [isCustomerCreated, setIsCustomerCreated] = useState<boolean>(false)
 
-  const {state, setState} = useContext(CustomerContext);
+  const { state, setState } = useContext(CustomerContext);
 
   useEffect(() => {
     if(isCustomerCreated) requestApi()
@@ -47,8 +47,6 @@ export default function RegisterFunction() {
   const requestApi = async () => {
     createCustomer(newCustomer)
   }
-
-  console.log(state)
 
   return (
     <>

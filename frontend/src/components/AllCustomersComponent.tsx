@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import CustomerContext from "../context/customer";
 import { Customer, getCustomers, apiReqDeleteCustomer } from "../http/requests/Customers";
 
 export default function AllCustomers() {
@@ -7,6 +8,8 @@ export default function AllCustomers() {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [modalCustomer, setModalCustomer] = useState<Customer[]>([]);
   const [searchBar, setSearchBar] = useState<string>("");
+
+  const { state, setState } = useContext(CustomerContext);
 
   const filterCustomers = (arrayOfCustomers: Customer[]) => {
     return arrayOfCustomers.filter((customer) => {
@@ -120,7 +123,7 @@ export default function AllCustomers() {
                     {
                       modalCustomer.length !== 0 && modalCustomer.map((e) => {
                         return (
-                          <div className="text-gray-600">
+                          <div key={e.customer_name} className="text-gray-600">
                           <tr className="text-gray-500">
                             Name
                             <th>
