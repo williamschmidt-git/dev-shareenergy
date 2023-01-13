@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export interface Customer {
-  name: string;
   email: string;
   address: string;
-  phoneNumber: string;
+  phone_number: string;
+  customer_name: string;
   cpf: string;
 }
 
@@ -19,10 +19,10 @@ export const createCustomer = async (customer: Customer) => {
       'content-type': 'application/json'
     },
     data: {
-      name: customer.name,
       email: customer.email,
-      phone_number: customer.phoneNumber,
+      phone_number: customer.phone_number,
       address: customer.address,
+      customer_name: customer.customer_name,
       cpf: customer.cpf
     }
   }

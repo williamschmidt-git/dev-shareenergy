@@ -5,12 +5,12 @@ export default function RegisterFunction() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [newCustomer, setNewCustomer] = useState<Customer>({
     address: '',
-    phoneNumber: '', 
+    phone_number: '',
+    customer_name: '',
     cpf: '',
     email: '',
-    name: ''
   });
-  const [name, setName] = useState<string>("");
+  const [customerName, setCustomerName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -23,9 +23,9 @@ export default function RegisterFunction() {
 
   const createNewCustomer = () => {
     const customer: Customer = {
-      name,
       address,
-      phoneNumber,
+      phone_number: phoneNumber,
+      customer_name: customerName,
       cpf,
       email
     }
@@ -80,7 +80,7 @@ export default function RegisterFunction() {
                   
                     <label className="mx-2">
                       <input type='text' className="border rounded-lg mb-3 px-1 text-start" placeholder="Name"
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => setCustomerName(e.target.value)}
                       />
                     </label>
 
