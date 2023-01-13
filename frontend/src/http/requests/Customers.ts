@@ -28,7 +28,6 @@ export const createCustomer = async (customer: Customer) => {
   }
 
   const response = await axios(options)
-  console.log(response)
 }
 
 export const getCustomers = async () => {

@@ -9,7 +9,6 @@ export default function CustomersComponent() {
       <HeaderComponent />
         <h1 className="font-roboto text-center text-4xl pt-14 text-gray-700 mb-4">CUSTOMERS</h1>
         <AllCustomers />
-        <RegisterFunction />
     </div>
   )
 }

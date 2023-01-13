@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import CustomerContext from "../context/customer";
 import { Customer, getCustomers, apiReqDeleteCustomer } from "../http/requests/Customers";
+import RegisterFunction from "./RegisterCustomer";
 
 export default function AllCustomers() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showList, setShowList] = useState<boolean>(true);
-  const [customers, setCustomers] = useState<Customer[]>([]);
+  // const [state, setState] = useState<Customer[]>([]);
   const [modalCustomer, setModalCustomer] = useState<Customer[]>([]);
   const [searchBar, setSearchBar] = useState<string>("");
 
@@ -17,32 +18,32 @@ export default function AllCustomers() {
     })
   }
 
-  const createModalCustomer = (customer: Customer) => {
-    setModalCustomer([{...customer}]);
+  const createModalCustomer = (selectedCustomer: Customer) => {
+    setModalCustomer([selectedCustomer]);
   }
 
   useEffect(() => {
-    if(customers.length < 1) requestCustomers()
-  }, [customers])
+    if(state.length < 1) requestCustomers()
+  }, [state])
 
   
   const requestCustomers = async () => {
     const response = await getCustomers();
-    setCustomers(response);
+    setState(response);
   }
 
   const deleteCustomer = async (email: string) => {
-    const newCustomersArray = customers.filter((customer) => {
-      return !customer.email.includes(email)
+    const newCustomersArray = state.filter((state) => {
+      return !state.email.includes(email)
     })
     setShowModal(false)
     setShowList(true)
-    setCustomers(newCustomersArray)
+    setState(newCustomersArray)
     await requestDeleteCustomer(email)
   }
   
   const requestDeleteCustomer = async (email: string) => {
-    if (!customers.some((e) => {
+    if (!state.some((e) => {
       e.email.includes(email)
     })) {
       apiReqDeleteCustomer(email)
@@ -51,14 +52,15 @@ export default function AllCustomers() {
 
   return(
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-28">
         <label>
           <input
           type="text"
           placeholder="Search by name" 
-          className="rounded-lg mb-2 3 p-2"
+          className="rounded-md mb-2 3 p-2"
           onChange={(e) => setSearchBar(e.target.value)}/>
         </label>
+        <RegisterFunction />
       </div>
 
       <div className="bg-white w-2/4 rounded-md mx-auto">
@@ -76,7 +78,7 @@ export default function AllCustomers() {
             
             <tbody className="text-gray-400 text-center">
               {
-                filterCustomers(customers).map((customer) => {
+                filterCustomers(state).map((customer) => {
                   return (
                     <>
                     <tr key={ customer.email } className="border-b border-solid border-slate-200 rounded-t mb-1">
