@@ -30,3 +30,17 @@ export const createCustomer = async (customer: Customer) => {
   const response = await axios(options)
   console.log(response)
 }
+
+export const getCustomers = async () => {
+  const options = {
+    method: 'GET',
+    url: BACKEND_URI,
+    headers: {
+      'content-type': 'application/json'
+    },
+  };
+
+  const {data} = await axios(options);
+
+  return data.customers;
+}
