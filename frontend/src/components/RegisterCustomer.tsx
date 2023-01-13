@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createCustomer, Customer } from "../http/requests/Customers";
+import CustomerContext from '../context/customer/'
+import { CustomerType } from "../@types/customer";
 
 export default function RegisterFunction() { 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -17,6 +19,8 @@ export default function RegisterFunction() {
   const [cpf, setCpf] = useState<string>("");
   const [isCustomerCreated, setIsCustomerCreated] = useState<boolean>(false)
 
+  const {state, setState} = useContext(CustomerContext);
+
   useEffect(() => {
     if(isCustomerCreated) requestApi()
   }, [setNewCustomer, newCustomer])
@@ -30,19 +34,21 @@ export default function RegisterFunction() {
       email
     }
 
-    return customer
+    return customer;
   }
 
   const callCreateCustomer = async () => {
     setShowModal(false)
     setNewCustomer(createNewCustomer())
+    setState([...state, createNewCustomer()])
     setIsCustomerCreated(true)
   }
 
   const requestApi = async () => {
-    console.log(newCustomer)
     createCustomer(newCustomer)
   }
+
+  console.log(state)
 
   return (
     <>
