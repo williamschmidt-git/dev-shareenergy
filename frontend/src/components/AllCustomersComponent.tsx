@@ -1,33 +1,65 @@
 import { useEffect, useState } from "react";
-import { Customer, getCustomers } from "../http/requests/Customers";
+import { Customer, getCustomers, apiReqDeleteCustomer } from "../http/requests/Customers";
 
 export default function AllCustomers() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showList, setShowList] = useState<boolean>(true);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [modalCustomer, setModalCustomer] = useState<Customer[]>([]);
+  const [searchBar, setSearchBar] = useState<string>("");
+
+  const filterCustomers = (arrayOfCustomers: Customer[]) => {
+    return arrayOfCustomers.filter((customer) => {
+      return customer.customer_name.toLowerCase().includes(searchBar.toLocaleLowerCase())
+    })
+  }
 
   const createModalCustomer = (customer: Customer) => {
     setModalCustomer([{...customer}]);
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     if(customers.length < 1) requestCustomers()
-  }, [])
+  }, [customers])
+
   
   const requestCustomers = async () => {
     const response = await getCustomers();
     setCustomers(response);
   }
 
-  const hiddenDisplay = 'hidden';
-  const defaultDisplay = '';
-
-  console.log(modalCustomer)
+  const deleteCustomer = async (email: string) => {
+    const newCustomersArray = customers.filter((customer) => {
+      return !customer.email.includes(email)
+    })
+    setShowModal(false)
+    setShowList(true)
+    setCustomers(newCustomersArray)
+    await requestDeleteCustomer(email)
+  }
+  
+  const requestDeleteCustomer = async (email: string) => {
+    if (!customers.some((e) => {
+      e.email.includes(email)
+    })) {
+      apiReqDeleteCustomer(email)
+    }
+  }
 
   return(
     <>
+      <div className="flex justify-center">
+        <label>
+          <input
+          type="text"
+          placeholder="Search by name" 
+          className="rounded-lg mb-2 3 p-2"
+          onChange={(e) => setSearchBar(e.target.value)}/>
+        </label>
+      </div>
+
       <div className="bg-white w-2/4 rounded-md mx-auto">
+        
         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
           {showList &&
           <table className="">
@@ -41,7 +73,7 @@ export default function AllCustomers() {
             
             <tbody className="text-gray-400 text-center">
               {
-                customers.map((customer) => {
+                filterCustomers(customers).map((customer) => {
                   return (
                     <>
                     <tr key={ customer.email } className="border-b border-solid border-slate-200 rounded-t mb-1">
@@ -51,15 +83,6 @@ export default function AllCustomers() {
                         <td className="mx-2 py-2 px-1">
                           { customer.email }
                         </td> 
-                        {/* <td className="mx-2 py-2 px-1">
-                          { customer.address }
-                        </td> 
-                        <td className="mx-2 py-2 px-1">
-                          { customer.phone_number }
-                        </td> 
-                        <td className="mx-2 py-2 px-1">
-                          { customer.cpf }
-                        </td> */}
                         <td>
                           <button
                           className="bg-pink-500 rounded-md"
@@ -126,31 +149,20 @@ export default function AllCustomers() {
                              </th>
                           </tr>
 
-                          <tr className="text-gray-500">
+                          <tr className="text-gray-500 ">
                             CPF
                             <th>
                               <td>{e.cpf}</td>
                              </th>
                           </tr>
-                          </div>
-                        )
-                      })
-                    } 
-                    
-                </thead>
-                </table>
-                </div>
-                <div className="flex flex-col items-center justify-center p-6 border-t border-solid border-slate-200 rounded-b">
+                          <div className="flex mt-3">
                 <button
                     className="text-white bg-pink-500 rounded-md w-28 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => {
-                      setShowModal(false)
-                      setShowList(true)
-                    }}
+                    onClick={() => deleteCustomer(e.email)}
                   >
                     Delete
-                  </button>
+                </button>
 
                   <button
                     className="text-white bg-pink-500 rounded-md w-28 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -174,6 +186,15 @@ export default function AllCustomers() {
                     Close
                   </button>
                 </div>
+                          </div>
+                        )
+                      })
+                    } 
+                    
+                </thead>
+                </table>
+                </div>
+                
               </div>
             </div>
           </div>

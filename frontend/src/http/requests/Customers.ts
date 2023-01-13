@@ -44,3 +44,17 @@ export const getCustomers = async () => {
 
   return data.customers;
 }
+
+export const apiReqDeleteCustomer = async (email: string) => {
+  const options = {
+    method: 'DELETE',
+    url: `${BACKEND_URI}/from/${email}`,
+    headers: {
+      'content-type': 'application/json'
+    },
+  };
+
+  const response = await axios(options)
+
+  return response;
+}
