@@ -28,13 +28,14 @@ export class CustomersController {
 
   @Post()
   async create(@Body() body: CreateCustomerBody) {
-    const { address, cpf, email, phone_number } = body;
+    const { address, cpf, email, phone_number, customer_name } = body;
 
     const { customer } = await this.createCustomer.execute({
       address,
       cpf,
       email,
       phone_number,
+      customer_name,
     });
 
     return {

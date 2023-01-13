@@ -7,6 +7,7 @@ export class CustomerViewModel {
       address: customer.address,
       email: customer.email,
       phone_number: customer.phone_number,
+      customer_name: customer.customer_name,
       cpf: customer.cpf,
     };
   }

@@ -11,7 +11,7 @@ describe('Create Customer', () => {
       cpf: '11111111111',
       email: 'email@email',
       phone_number: '99 9999-9999',
-      name: 'namename',
+      customer_name: 'namename',
     });
 
     expect(customerRepository.customers).toHaveLength(1);

@@ -7,7 +7,7 @@ interface CreateCustomerRequest {
   phone_number: string;
   address: string;
   cpf: string;
-  name: string;
+  customer_name: string;
 }
 
 interface CreateCustomerResponse {
@@ -21,14 +21,14 @@ export class CreateCustomer {
   async execute(
     request: CreateCustomerRequest,
   ): Promise<CreateCustomerResponse> {
-    const { address, cpf, phone_number, email, name } = request;
+    const { address, cpf, phone_number, email, customer_name } = request;
 
     const customer = new Customer({
       address,
       cpf,
       phone_number,
       email,
-      name,
+      customer_name,
     });
 
     await this.customerRepository.create(customer);

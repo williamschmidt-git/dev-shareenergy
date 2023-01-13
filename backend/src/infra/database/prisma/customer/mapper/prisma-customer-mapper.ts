@@ -5,6 +5,7 @@ export class PrismaCustomerMapper {
   static toPrisma(customer: Customer) {
     return {
       id: customer.id,
+      customer_name: customer.customer_name,
       address: customer.address,
       email: customer.email,
       cpf: customer.cpf,
@@ -17,6 +18,7 @@ export class PrismaCustomerMapper {
   static toDomain(rawData: RawCustomer): Customer {
     return new Customer({
       id: rawData.id,
+      customer_name: rawData.customer_name,
       address: rawData.address,
       email: rawData.email,
       cpf: rawData.cpf,

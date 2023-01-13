@@ -8,7 +8,7 @@ export function makeCustomer(override: Override = {}) {
     cpf: '11111111111',
     email: 'email2@email2.com',
     phone_number: '99 9999-9999',
-    name: 'namename',
+    customer_name: 'namename',
     ...override,
   });
 }

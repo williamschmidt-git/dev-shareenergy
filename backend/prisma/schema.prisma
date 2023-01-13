@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Customer {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  email        String   @unique
-  phone_number String
-  address      String
-  cpf          String
-  created_at   DateTime @default(now())
-  updated_at   DateTime @default(now())
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  customer_name String
+  email         String   @unique
+  phone_number  String
+  address       String
+  cpf           String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now())
 }
 
 model User {

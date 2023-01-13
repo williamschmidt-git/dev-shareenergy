@@ -14,6 +14,9 @@ export class CreateCustomerBody {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+
+  @IsNotEmpty()
+  customer_name: string;
 }
 
 // address: string;

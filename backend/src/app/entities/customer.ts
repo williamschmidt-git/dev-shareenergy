@@ -3,7 +3,7 @@ import { Replace } from 'src/helpers/Replace';
 
 export interface CustomerData {
   id?: string;
-  name: string;
+  customer_name: string;
   address: string;
   cpf: string;
   phone_number: string;
@@ -32,12 +32,12 @@ export class Customer {
     return this.props.id;
   }
 
-  public get name(): string {
-    return this.props.name;
+  public get customer_name(): string {
+    return this.props.customer_name;
   }
 
-  public set name(name: string) {
-    this.props.name = name;
+  public set customer_name(customer_name: string) {
+    this.props.customer_name = customer_name;
   }
 
   public set address(address: string) {

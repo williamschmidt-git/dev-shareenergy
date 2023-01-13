@@ -7,7 +7,7 @@ describe('Customer', () => {
       email: 'email@email.com',
       cpf: '11111111111',
       phone_number: '99 9999-9999',
-      name: 'namename',
+      customer_name: 'namename',
     });
 
     expect(customer).toBeTruthy();
