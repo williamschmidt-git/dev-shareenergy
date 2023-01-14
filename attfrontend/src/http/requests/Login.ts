@@ -1,4 +1,4 @@
-const endpoint = 'sloppy-hand-production.up.railway.app/'
+const endpoint = 'https://teal-wheel-production.up.railway.app/'
 
 interface LoginBody {
   username: string;
