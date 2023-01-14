@@ -11,7 +11,7 @@ export const login = async(body: LoginBody) => {
     password: body.password
   })
 
-  const response = await fetch(`${BACKEND_URI}/auth/login`, {
+  const response = await fetch(`${process.env.BACKEND}/auth/login`, {
     
     method: 'POST',
     body: raw,
