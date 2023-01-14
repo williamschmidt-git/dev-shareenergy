@@ -12,7 +12,7 @@ export const createCustomer = async (customer: Customer) => {
 
   const options = {
     method: 'POST',
-    url: `${process.env.BACKEND}/customers`,
+    url: `${process.env.REACT_APP_BACKEND_REQUEST}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -31,7 +31,7 @@ export const createCustomer = async (customer: Customer) => {
 export const getCustomers = async () => {
   const options = {
     method: 'GET',
-    url: `${process.env.BACKEND}/customers`,
+    url: `${process.env.REACT_APP_BACKEND_REQUEST}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -45,7 +45,7 @@ export const getCustomers = async () => {
 export const apiReqDeleteCustomer = async (email: string) => {
   const options = {
     method: 'DELETE',
-    url: `${process.env.BACKEND}/customers/from/${email}`,
+    url: `${process.env.REACT_APP_BACKEND_REQUEST}/customers/from/${email}`,
     headers: {
       'content-type': 'application/json'
     },
@@ -59,7 +59,7 @@ export const apiReqDeleteCustomer = async (email: string) => {
 export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
   const options = {
     method: 'PUT',
-    url: `${process.env.BACKEND}/customers/from/${email}`,
+    url: `${process.env.REACT_APP_BACKEND_REQUEST}/customers/from/${email}`,
     data: customer,
     headers: {
       'content-type': 'application/json'
