@@ -8,13 +8,13 @@ export interface Customer {
   cpf: string;
 }
 
-export const BACKEND_URI = 'https://teal-wheel-production.up.railway.app/customers'
+export const BACKEND_URI = process.env.BACKEND || 'https://teal-wheel-production.up.railway.app'
 
 export const createCustomer = async (customer: Customer) => {
 
   const options = {
     method: 'POST',
-    url: BACKEND_URI,
+    url: `${BACKEND_URI}/customers`,
     headers: {
       'content-type': 'application/json'
     },

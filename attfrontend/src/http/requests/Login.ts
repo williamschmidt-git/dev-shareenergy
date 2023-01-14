@@ -1,4 +1,4 @@
-const endpoint = 'https://teal-wheel-production.up.railway.app/'
+import { BACKEND_URI } from "./Customers";
 
 interface LoginBody {
   username: string;
@@ -11,7 +11,7 @@ export const login = async(body: LoginBody) => {
     password: body.password
   })
 
-  const response = await fetch(`${endpoint}auth/login`, {
+  const response = await fetch(`${BACKEND_URI}auth/login`, {
     
     method: 'POST',
     body: raw,
