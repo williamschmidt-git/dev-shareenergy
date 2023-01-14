@@ -1,4 +1,4 @@
-const endpoint = 'http://localhost:3000/'
+const endpoint = 'https://pumped-debt-production.up.railway.app/'
 
 interface LoginBody {
   username: string;

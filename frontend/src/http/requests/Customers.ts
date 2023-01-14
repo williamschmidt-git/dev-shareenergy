@@ -8,7 +8,7 @@ export interface Customer {
   cpf: string;
 }
 
-export const BACKEND_URI = 'http://localhost:3000/customers'
+export const BACKEND_URI = 'https://pumped-debt-production.up.railway.app/customers'
 
 export const createCustomer = async (customer: Customer) => {
 
