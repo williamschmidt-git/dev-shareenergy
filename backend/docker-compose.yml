@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  # mongo:
+  #   container_name: mongo
+  #   image: mongo:4
+  #   command: --replSet rs0
+  #   ports:
+  #     - '27017:27017'
+  #     - '28017:28017'
+  #   volumes:
+  #     - ./data/mongo:/data/db
+
+  mongo:
+    image: mongo:5.0.7
+    container_name: mongo
+    command: --replSet rs0
+    volumes:
+      - ./data/mongo:/data/db
+    restart: always
+    ports:
+      # Garanta que não haverá conflitos de porta com um mongodb que esteja
+      # rodando localmente
+      - 27017:27017
+      - 28017:28017
