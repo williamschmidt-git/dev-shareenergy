@@ -8,8 +8,6 @@ export interface Customer {
   cpf: string;
 }
 
-export const BACKEND_URI = process.env.BACKEND || 'https://teal-wheel-production.up.railway.app'
-
 export const createCustomer = async (customer: Customer) => {
 
   const options = {
