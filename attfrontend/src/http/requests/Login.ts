@@ -3,13 +3,15 @@ interface LoginBody {
   password: string
 }
 
+const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
+
 export const login = async(body: LoginBody) => {
   const raw = JSON.stringify({
     username: body.username,
     password: body.password
   })
 
-  const response = await fetch(`${process.env.VITE_BACKEND_REQUEST}/auth/login`, {
+  const response = await fetch(`${BACKEND_URI}/auth/login`, {
     
     method: 'POST',
     body: raw,
@@ -21,6 +23,5 @@ export const login = async(body: LoginBody) => {
     }
   });
 
-  console.log(process.env.VITE_BACKEND_REQUEST)
   return await response.json();
 }
