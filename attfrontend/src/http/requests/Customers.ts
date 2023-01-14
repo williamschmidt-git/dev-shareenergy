@@ -31,7 +31,7 @@ export const createCustomer = async (customer: Customer) => {
 export const getCustomers = async () => {
   const options = {
     method: 'GET',
-    url: BACKEND_URI,
+    url: `${process.env.BACKEND}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -45,7 +45,7 @@ export const getCustomers = async () => {
 export const apiReqDeleteCustomer = async (email: string) => {
   const options = {
     method: 'DELETE',
-    url: `${BACKEND_URI}/from/${email}`,
+    url: `${process.env.BACKEND}/customers/from/${email}`,
     headers: {
       'content-type': 'application/json'
     },
@@ -59,7 +59,7 @@ export const apiReqDeleteCustomer = async (email: string) => {
 export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
   const options = {
     method: 'PUT',
-    url: `${BACKEND_URI}/from/${email}`,
+    url: `${process.env.BACKEND}/customers/from/${email}`,
     data: customer,
     headers: {
       'content-type': 'application/json'
