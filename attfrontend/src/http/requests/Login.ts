@@ -9,7 +9,7 @@ export const login = async(body: LoginBody) => {
     password: body.password
   })
 
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_REQUEST}/auth/login`, {
+  const response = await fetch(`${process.env.VITE_BACKEND_REQUEST}/auth/login`, {
     
     method: 'POST',
     body: raw,
@@ -21,5 +21,6 @@ export const login = async(body: LoginBody) => {
     }
   });
 
+  console.log(process.env.VITE_BACKEND_REQUEST)
   return await response.json();
 }
