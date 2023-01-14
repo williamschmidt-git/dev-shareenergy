@@ -1,5 +1,3 @@
-import { BACKEND_URI } from "./Customers";
-
 interface LoginBody {
   username: string;
   password: string
