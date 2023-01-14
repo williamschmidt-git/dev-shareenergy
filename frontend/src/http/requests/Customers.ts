@@ -57,3 +57,19 @@ export const apiReqDeleteCustomer = async (email: string) => {
 
   return response;
 }
+
+export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
+  const options = {
+    method: 'PUT',
+    url: `${BACKEND_URI}/from/${email}`,
+    data: customer,
+    headers: {
+      'content-type': 'application/json'
+    },
+  }
+
+  const response = await axios(options)
+  console.log(response);
+
+  return response;
+}

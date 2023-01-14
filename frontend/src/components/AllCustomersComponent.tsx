@@ -1,16 +1,34 @@
 import { useContext, useEffect, useState } from "react";
 import CustomerContext from "../context/customer";
-import { Customer, getCustomers, apiReqDeleteCustomer } from "../http/requests/Customers";
+import { Customer, getCustomers, apiReqDeleteCustomer, apiReqUpdateCustomer } from "../http/requests/Customers";
 import RegisterFunction from "./RegisterCustomer";
 
 export default function AllCustomers() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showList, setShowList] = useState<boolean>(true);
-  // const [state, setState] = useState<Customer[]>([]);
+  const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
   const [modalCustomer, setModalCustomer] = useState<Customer[]>([]);
   const [searchBar, setSearchBar] = useState<string>("");
+  const [customerName, setCustomerName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [cpf, setCpf] = useState<string>("");
+  const [updatedData, setUpdatedData] = useState<Customer>({
+    address: '',
+    phone_number: '',
+    customer_name: '',
+    cpf: '',
+    email: '',
+  });
+
+  const[isDataUpdated, setIsDataUpdated] = useState<boolean>(false)
 
   const { state, setState } = useContext(CustomerContext);
+
+  useEffect(() => {
+    if(isDataUpdated) requestUpdateCustomer()
+  }, [updatedData])
 
   const filterCustomers = (arrayOfCustomers: Customer[]) => {
     return arrayOfCustomers.filter((customer) => {
@@ -38,7 +56,7 @@ export default function AllCustomers() {
     })
     setShowModal(false)
     setShowList(true)
-    setState(newCustomersArray)
+    setState(newCustomersArray.sort())
     await requestDeleteCustomer(email)
   }
   
@@ -50,17 +68,44 @@ export default function AllCustomers() {
     }
   }
 
+  const updateCustomer = async () => {
+    const customer: Customer = {
+      address,
+      phone_number: phoneNumber,
+      customer_name: customerName,
+      cpf,
+      email
+    }
+
+    const newCustomerArray = state.filter((s) => {
+      return !s.email.includes(email);
+    })
+
+    setShowModalUpdate(false);
+    setState([customer, ...newCustomerArray])
+    setUpdatedData(customer);
+    setIsDataUpdated(true);
+    await requestUpdateCustomer();
+
+    return customer;
+  }
+
+  const requestUpdateCustomer = async () => {
+    await apiReqUpdateCustomer(updatedData, email)
+  }
+
   return(
     <>
-      <div className="flex justify-center gap-28">
-        <label>
-          <input
-          type="text"
-          placeholder="Search by name" 
-          className="rounded-md mb-2 3 p-2"
-          onChange={(e) => setSearchBar(e.target.value)}/>
-        </label>
-        <RegisterFunction />
+      <div className="flex justify-center gap-x-2">
+      <label>
+        <input
+        type="text"
+        placeholder="Search by name" 
+        className="rounded-md p-2 h-10"
+        onChange={(e) => setSearchBar(e.target.value)}/>
+      </label>
+      <RegisterFunction />
+        
       </div>
 
       <div className="bg-white w-2/4 rounded-md mx-auto">
@@ -173,8 +218,9 @@ export default function AllCustomers() {
                     className="text-white bg-pink-500 rounded-md w-28 font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
+                      setShowModalUpdate(true)
                       setShowModal(false)
-                      setShowList(true)
+                      setShowList(false)
                     }}
                   >
                     Update
@@ -185,6 +231,7 @@ export default function AllCustomers() {
                     type="button"
                     onClick={() => {
                       setShowModal(false)
+                      setShowModalUpdate(false)
                       setShowList(true)
                     }}
                   >
@@ -195,7 +242,6 @@ export default function AllCustomers() {
                         )
                       })
                     } 
-                    
                 </thead>
                 </table>
                 </div>
@@ -205,8 +251,99 @@ export default function AllCustomers() {
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-        ) : null}</>
+        ) : null}
+        </>
+        <>
+          {
+          showModalUpdate ? 
+          (
+            <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-semibold text-gray-600">
+                    Update Customer
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <form className="my-4 text-slate-500 text-lg leading-relaxed flex justify-center flex-col"> 
+                  
+                    <label className="mx-2">
+                      <input type='text' className="border rounded-lg mb-3 px-1 text-start" placeholder="Name"
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      />
+                    </label>
+
+                    <label className="mx-2">
+                      <input type='text' className="border rounded-lg mb-3 px-1 " placeholder="E-mail"
+                      onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </label>
+
+                    <label className="mx-2">
+                      <input type='text' className="border rounded-lg mb-3 px-1 " placeholder="Address"
+                      onChange={(e) => setAddress(e.target.value)}
+                      />
+                    </label>
+
+                    <label className="mx-2">
+                      <input type='text' className="border rounded-lg mb-3 px-1 " placeholder="Cellphone"
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      />
+                    </label>
+
+                    <label className="mx-2">
+                      <input type='text' className="border rounded-lg mb-3 px-1 " placeholder="CPF"
+                      onChange={(e) => setCpf(e.target.value)}
+                      />
+                    </label>
+
+                  </form>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                      setShowModalUpdate(false)
+                      setShowList(true)
+                    }}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                      updateCustomer()
+                      setShowList(true)
+                    }}
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          ) : null
+          }
+        </>
       </div>
+      
     </>
   )
 }
