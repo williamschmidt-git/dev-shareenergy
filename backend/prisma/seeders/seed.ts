@@ -8,7 +8,7 @@ async function main() {
     where: { username: 'desafiosharenergy' },
     create: {
       username: 'desafiosharenergy',
-      password: HashGenerator.hash('sh@r3n3rgy'),
+      password: 'sh@r3n3rgy',
     },
     update: {},
   });
