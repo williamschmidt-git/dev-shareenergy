@@ -7,7 +7,6 @@ import Main from './pages/Main'
 import RandomDog from './pages/RandomDog'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
