@@ -14,7 +14,7 @@ export const createCustomer = async (customer: Customer) => {
 
   const options = {
     method: 'POST',
-    url: `${BACKEND_URI}/customers`,
+    url: `${process.env.BACKEND}/customers`,
     headers: {
       'content-type': 'application/json'
     },
