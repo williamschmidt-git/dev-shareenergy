@@ -26,11 +26,11 @@ export default function MainComponent() {
 
   const filterUsers = (users: FormattedRandomUser[]) => {
     return users.filter((user) => {
-      if(searchBar.includes('@')) {
+      if(searchBar.includes('@') || user.email.toLowerCase().includes(searchBar.toLowerCase())) {
         return user.email.toLowerCase().includes(searchBar.toLowerCase())
       }
       
-      if(/\d/.test(searchBar.toLocaleLowerCase())) {
+      if(/\d/.test(searchBar.toLocaleLowerCase()) || user.username.toLowerCase().includes(searchBar.toLowerCase())) {
         return user.username.toLowerCase().includes(searchBar.toLowerCase())
       }
 
