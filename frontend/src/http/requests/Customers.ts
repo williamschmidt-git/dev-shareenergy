@@ -2,6 +2,10 @@ import axios from "axios";
 
 // import * as dotenv from 'dotenv';
 
+export const api = {
+  backend_url: import.meta.env.VITE_BACKEND_REQUEST
+}
+
 export interface Customer {
   email: string;
   address: string;
@@ -10,13 +14,12 @@ export interface Customer {
   cpf: string;
 }
 
-const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
+// const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
 
 export const createCustomer = async (customer: Customer) => {
-
   const options = {
     method: 'POST',
-    url: `${BACKEND_URI}/customers`,
+    url: `${api.backend_url}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -30,12 +33,13 @@ export const createCustomer = async (customer: Customer) => {
   }
 
   const response = await axios(options)
+  return response;
 }
 
 export const getCustomers = async () => {
   const options = {
     method: 'GET',
-    url: `${BACKEND_URI}/customers`,
+    url: `${api.backend_url}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -49,7 +53,7 @@ export const getCustomers = async () => {
 export const apiReqDeleteCustomer = async (email: string) => {
   const options = {
     method: 'DELETE',
-    url: `${BACKEND_URI}/customers/from/${email}`,
+    url: `${api.backend_url}/customers/from/${email}`,
     headers: {
       'content-type': 'application/json'
     },
@@ -63,7 +67,7 @@ export const apiReqDeleteCustomer = async (email: string) => {
 export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
   const options = {
     method: 'PUT',
-    url: `${BACKEND_URI}/customers/from/${email}`,
+    url: `${api.backend_url}/customers/from/${email}`,
     data: customer,
     headers: {
       'content-type': 'application/json'
