@@ -1,19 +1,19 @@
-import formatRandomUsers from "../../utils/formatRandomUsers";
+import formatRandomUsers from '../../utils/formatRandomUsers';
 
-export const RANDOM_USER_URI = "https://randomuser.me/api/"
+export const RANDOM_USER_URI = 'https://randomuser.me/api/';
 
-export default async function getRandomUser (numberOfRequests: number)  {
+export default async function getRandomUser(numberOfRequests: number) {
   const response = await fetch(`${RANDOM_USER_URI}?results=${numberOfRequests}`, {
     method: 'GET',
-    mode: "cors",
+    mode: 'cors',
     redirect: 'follow',
     headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    }
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+    },
   });
 
-  const { results } = await response.json()
-  const formattedResult = formatRandomUsers(results)
+  const { results } = await response.json();
+  const formattedResult = formatRandomUsers(results);
   return formattedResult;
 }

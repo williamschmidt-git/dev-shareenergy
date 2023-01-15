@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 // import * as dotenv from 'dotenv';
 
 export const api = {
-  backend_url: import.meta.env.VITE_BACKEND_REQUEST
-}
+  backend_url: import.meta.env.VITE_BACKEND_REQUEST,
+};
 
 export interface Customer {
   email: string;
@@ -21,48 +21,48 @@ export const createCustomer = async (customer: Customer) => {
     method: 'POST',
     url: `${api.backend_url}/customers`,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     data: {
       email: customer.email,
       phone_number: customer.phone_number,
       address: customer.address,
       customer_name: customer.customer_name,
-      cpf: customer.cpf
-    }
-  }
+      cpf: customer.cpf,
+    },
+  };
 
-  const response = await axios(options)
+  const response = await axios(options);
   return response;
-}
+};
 
 export const getCustomers = async () => {
   const options = {
     method: 'GET',
     url: `${api.backend_url}/customers`,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
   };
 
-  const {data} = await axios(options);
+  const { data } = await axios(options);
 
   return data.customers;
-}
+};
 
 export const apiReqDeleteCustomer = async (email: string) => {
   const options = {
     method: 'DELETE',
     url: `${api.backend_url}/customers/from/${email}`,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
   };
 
-  const response = await axios(options)
+  const response = await axios(options);
 
   return response;
-}
+};
 
 export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
   const options = {
@@ -70,11 +70,11 @@ export const apiReqUpdateCustomer = async (customer: Customer, email: string) =>
     url: `${api.backend_url}/customers/from/${email}`,
     data: customer,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
-  }
+  };
 
-  const response = await axios(options)
+  const response = await axios(options);
 
   return response;
-}
+};

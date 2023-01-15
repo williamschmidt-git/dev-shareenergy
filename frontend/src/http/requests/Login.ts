@@ -1,4 +1,4 @@
-import { api } from "./Customers";
+import { api } from './Customers';
 
 interface LoginBody {
   username: string;
@@ -7,22 +7,23 @@ interface LoginBody {
 
 // const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
 
-export const login = async(body: LoginBody) => {
+export default async function login(body: LoginBody) {
   const raw = JSON.stringify({
     username: body.username,
-    password: body.password
-  })
+    password: body.password,
+  });
 
   const response = await fetch(`${api.backend_url}/auth/login`, {
     method: 'POST',
     body: raw,
-    mode: "cors",
+    mode: 'cors',
     redirect: 'follow',
     headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    }
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+    },
   });
 
-  return await response.json();
+  const tokenResponse = await response.json();
+  return tokenResponse;
 }

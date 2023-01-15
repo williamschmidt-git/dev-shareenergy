@@ -1,7 +1,8 @@
-import HTTPCats from "../components/HTTPCatsComponent";
+import React from 'react';
+import HTTPCats from '../components/HTTPCatsComponent';
 
 export default function Login() {
   return (
     <HTTPCats />
-  )
+  );
 }

@@ -1,22 +1,19 @@
-import { useState } from "react"
-import UserContext, { DEFAULT_VALUE}  from "../../user";
+import React, { useState } from 'react';
+import UserContext, { DEFAULT_VALUE } from '../../user';
 
 interface Props {
   children: React.ReactNode
 }
 
-const UserProvider: React.FC<Props> = ({children} : Props) => {
-  const [state, setState] = useState(DEFAULT_VALUE.state)
+export default function UserProvider({ children } : Props) {
+  const [state, setState] = useState(DEFAULT_VALUE.state);
+
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const obj = { state, setState };
 
   return (
-    <UserContext.Provider value={{
-      state,
-      setState
-      }}
-    >
+    <UserContext.Provider value={obj}>
       { children }
     </UserContext.Provider>
   );
-};
-
-export { UserProvider };
+}

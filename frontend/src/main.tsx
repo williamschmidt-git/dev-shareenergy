@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
-import { CustomerProvider } from './context/provider/customer'
-import { UserProvider } from './context/provider/user'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { CustomerProvider } from './context/provider/customer';
+import UserProvider from './context/provider/user';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
@@ -12,5 +12,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <App />
       </CustomerProvider>
     </UserProvider>
-  </BrowserRouter>
-)
+  </BrowserRouter>,
+);
