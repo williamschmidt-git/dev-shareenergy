@@ -62,7 +62,7 @@ export default function HTTPCatsComponent() {
           <img src={`https://http.cat/${statusCode}`} className="rounded-lg " alt="cat" />
         ) : null}
         {
-          isRendered === true && !isCodeValid ? (<img src="/imgs/dog.jpg" className="rounded-lg" alt="not-found" />) : null
+          isRendered === true && !isCodeValid ? (<img src="https://http.cat/404" className="rounded-lg" alt="not-found" />) : null
         }
       </form>
 
