@@ -17,7 +17,7 @@ export default function MainComponent() {
 
   useEffect(() => {
     if(users.length === 0) requestApi();
-  })
+  }, [users])
 
   const requestApi = async () => {
     const response = await getRandomUser(9)
@@ -38,7 +38,6 @@ export default function MainComponent() {
     });
   }
 
-
   return (
     <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center">
       <HeaderComponent />
@@ -56,8 +55,8 @@ export default function MainComponent() {
           ></input>
         </label>
         <button className=" ml-1 bg-indigo-600 px-3 h-6 rounded-lg text-white font-medium shadow-md"
-        // onClick={handleClick}
-        type="button">search</button>
+        onClick={() => requestApi()}
+        type="button">update users</button>
       </div>
 
       <div className="flex flex-wrap w-auto justify-center">
