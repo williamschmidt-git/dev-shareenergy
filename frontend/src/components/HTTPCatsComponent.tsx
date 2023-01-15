@@ -7,10 +7,19 @@ export default function HTTPCatsComponent() {
   const [formatedStatusCode, setFormatedStatusCode] = useState<string>("")
   const [isCodeValid, setIsCodeValid] = useState<boolean>();
   const [isRendered, setIsRendered] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  if(isRendered) setIsRendered(false)
   useEffect(() => {
-    checkIfCodeExists();
+    const doLoad = async () => {
+      setIsLoading(true)
+      checkIfCodeExists();
+    }
+    doLoad();
+    setIsLoading(false)
+
   }, [statusCode])
+
 
   const all_codes = Object.entries(HttpStatusCode).map(([key, value]) => ({
     key, value
@@ -26,7 +35,6 @@ export default function HTTPCatsComponent() {
     } else {
       setIsCodeValid(false)
     }
-
   }
 
   const handleSubmit = (e:React.FormEvent) => {
@@ -56,9 +64,12 @@ export default function HTTPCatsComponent() {
 
         {isCodeValid ? (
           <img src={`https://http.cat/${statusCode}`} className="rounded-lg "></img>
-        ) : (<></>)}
+        ) : null}
         {
           isRendered === true && !isCodeValid? (<img src='../../imgs/dog.jpg' className="rounded-lg "></img>) : (<></>)
+        }
+        {
+          (isLoading) && <div>loading</div>
         }
       </form>
 
