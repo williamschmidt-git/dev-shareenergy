@@ -1,9 +1,9 @@
-const endpoint = 'https://pumped-debt-production.up.railway.app/'
-
 interface LoginBody {
   username: string;
   password: string
 }
+
+const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
 
 export const login = async(body: LoginBody) => {
   const raw = JSON.stringify({
@@ -11,7 +11,7 @@ export const login = async(body: LoginBody) => {
     password: body.password
   })
 
-  const response = await fetch(`${endpoint}auth/login`, {
+  const response = await fetch(`${BACKEND_URI}/auth/login`, {
     
     method: 'POST',
     body: raw,

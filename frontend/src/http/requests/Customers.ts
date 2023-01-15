@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// import * as dotenv from 'dotenv';
+
 export interface Customer {
   email: string;
   address: string;
@@ -8,13 +10,13 @@ export interface Customer {
   cpf: string;
 }
 
-export const BACKEND_URI = 'https://pumped-debt-production.up.railway.app/customers'
+const BACKEND_URI = 'https://teal-wheel-production.up.railway.app'
 
 export const createCustomer = async (customer: Customer) => {
 
   const options = {
     method: 'POST',
-    url: BACKEND_URI,
+    url: `${BACKEND_URI}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -33,7 +35,7 @@ export const createCustomer = async (customer: Customer) => {
 export const getCustomers = async () => {
   const options = {
     method: 'GET',
-    url: BACKEND_URI,
+    url: `${BACKEND_URI}/customers`,
     headers: {
       'content-type': 'application/json'
     },
@@ -47,7 +49,7 @@ export const getCustomers = async () => {
 export const apiReqDeleteCustomer = async (email: string) => {
   const options = {
     method: 'DELETE',
-    url: `${BACKEND_URI}/from/${email}`,
+    url: `${BACKEND_URI}/customers/from/${email}`,
     headers: {
       'content-type': 'application/json'
     },
@@ -61,7 +63,7 @@ export const apiReqDeleteCustomer = async (email: string) => {
 export const apiReqUpdateCustomer = async (customer: Customer, email: string) => {
   const options = {
     method: 'PUT',
-    url: `${BACKEND_URI}/from/${email}`,
+    url: `${BACKEND_URI}/customers/from/${email}`,
     data: customer,
     headers: {
       'content-type': 'application/json'

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { createCustomer, Customer } from "../http/requests/Customers";
-import CustomerContext from '../context/customer/'
+import CustomerContext from '../context/customer'
 import { CustomerType } from "../@types/customer";
 
 export default function RegisterFunction() { 
