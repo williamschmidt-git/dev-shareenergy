@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { CustomerType } from "../../../@types/customer";
-import CustomerContext, { DEFAULT_VALUE } from "../../customer";
+import CustomerContext from "../../customer";
 
 interface Props {
   children: React.ReactNode

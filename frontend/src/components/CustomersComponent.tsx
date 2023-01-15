@@ -1,7 +1,6 @@
-import AllCustomers from "./AllCustomersComponent";
-import HeaderComponent from "./HeaderComponent";
-import ListCustomers from "./ListCustomers";
-import RegisterFunction from "./RegisterCustomer";
+import React from 'react';
+import AllCustomers from './AllCustomersComponent';
+import HeaderComponent from './HeaderComponent';
 
 export default function CustomersComponent() {
   return (
@@ -9,7 +8,6 @@ export default function CustomersComponent() {
       <HeaderComponent />
       <h1 className="font-roboto text-center text-4xl pt-14 text-gray-700 mb-4">CUSTOMERS</h1>
       <AllCustomers />
-      
     </div>
-  )
+  );
 }

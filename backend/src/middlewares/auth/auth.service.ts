@@ -22,7 +22,7 @@ export class AuthService {
 
     const { password } = user;
 
-    if (await HashComparator.compare(password, userToCompare.user.password)) {
+    if (password === userToCompare.user.password) {
       return await this.genToken(user);
     }
 

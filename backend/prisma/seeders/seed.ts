@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 async function main() {
   const user = await prisma.user.upsert({
-    where: { username: 'desafioshareenergy' },
+    where: { username: 'desafiosharenergy' },
     create: {
-      username: 'desafioshareenergy',
-      password: HashGenerator.hash('sh@r3n3rgy'),
+      username: 'desafiosharenergy',
+      password: 'sh@r3n3rgy',
     },
     update: {},
   });

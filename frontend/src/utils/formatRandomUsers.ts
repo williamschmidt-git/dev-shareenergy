@@ -1,4 +1,4 @@
-import { FormattedRandomUser } from "../components/MainComponent";
+import { FormattedRandomUser } from '../components/MainComponent';
 
 export interface RandomUser {
   cell: string;
@@ -56,11 +56,11 @@ export default function formatRandomUsers(users: RandomUser[]): FormattedRandomU
       fullName: `${user.name.first} ${user.name.last}`,
       email: user.email,
       username: user.login.username,
-      age: user.dob.age
-    }
+      age: user.dob.age,
+    };
 
     return formattedUser;
-  })
+  });
 
   return formattedUsers;
 }
