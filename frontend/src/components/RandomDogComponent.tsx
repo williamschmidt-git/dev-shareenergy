@@ -23,7 +23,6 @@ export default function RandomDogComponent() {
     setIsLoading(false);
   }
   
-
   return (
     <div className="bg-gray-200 h-screen flex flex-col align-middle justify-items-center text-center">
       <HeaderComponent />

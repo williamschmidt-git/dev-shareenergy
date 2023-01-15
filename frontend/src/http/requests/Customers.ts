@@ -75,7 +75,6 @@ export const apiReqUpdateCustomer = async (customer: Customer, email: string) =>
   }
 
   const response = await axios(options)
-  console.log(response);
 
   return response;
 }
