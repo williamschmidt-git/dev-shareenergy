@@ -16,7 +16,7 @@ export default async function login(body: LoginBody) {
   const response = await fetch(`${api.backend_url}/auth/login`, {
     method: 'POST',
     body: raw,
-    mode: 'cors',
+    mode: 'no-cors',
     redirect: 'follow',
     headers: {
       Accept: 'application/json',
