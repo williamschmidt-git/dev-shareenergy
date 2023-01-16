@@ -25,8 +25,7 @@ export default function AllCustomers() {
     cpf: '',
     email: '',
   });
-  const [isCustomerDeleted, setIsCustomerDeleted] = useState<boolean>(false);
-  const [emailToDelete, setEmailToDelete] = useState<string>('');
+
   const [isDataUpdated, setIsDataUpdated] = useState<boolean>(false);
 
   const { state, setState } = useContext(CustomerContext);
@@ -38,7 +37,6 @@ export default function AllCustomers() {
   useEffect(() => {
     if (isDataUpdated) requestUpdateCustomer();
   }, [updatedData]);
-  // teste
 
   const filterCustomers = (arrayOfCustomers: Customer[]) => {
     const array = arrayOfCustomers.filter((customer) => customer.customer_name.toLowerCase()
@@ -53,30 +51,24 @@ export default function AllCustomers() {
   const requestCustomers = async () => {
     const response = await getCustomers();
     setState(response);
-    return response;
   };
 
   useEffect(() => {
     if (state.length < 1) requestCustomers();
   }, [state]);
 
-  useEffect(() => {
-    async function callDelete() {
-      if (isCustomerDeleted) {
-        await apiReqDeleteCustomer(emailToDelete);
-        setState(await requestCustomers());
-        setIsCustomerDeleted(false);
-      }
+  const requestDeleteCustomer = async (customerEmail: string) => {
+    if (!state.some((e) => e.email.includes(customerEmail))) {
+      apiReqDeleteCustomer(customerEmail);
     }
-    callDelete();
-  }, [isCustomerDeleted, state]);
+  };
 
   const deleteCustomer = async (customerEmail: string) => {
-    // const newCustomersArray = state.filter((element) => !element.email.includes(customerEmail));
-    setEmailToDelete(customerEmail);
+    const newCustomersArray = state.filter((element) => !element.email.includes(customerEmail));
     setShowModal(false);
     setShowList(true);
-    setIsCustomerDeleted(true);
+    setState(newCustomersArray.sort());
+    await requestDeleteCustomer(customerEmail);
   };
 
   const updateCustomer = async () => {
