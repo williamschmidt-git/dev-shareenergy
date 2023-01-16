@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import { api } from './Customers';
 
 interface LoginBody {
@@ -16,14 +17,13 @@ export default async function login(body: LoginBody) {
   const response = await fetch(`${api.backend_url}/auth/login`, {
     method: 'POST',
     body: raw,
-    mode: 'no-cors',
-    redirect: 'follow',
+    // mode: 'no-cors',
+    // redirect: 'follow',
     headers: {
-      Accept: 'application/json',
+      'Accept': 'application/json',
       'Content-type': 'application/json',
     },
   });
-
   const tokenResponse = await response.json();
   return tokenResponse;
 }
