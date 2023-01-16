@@ -37,6 +37,7 @@ export default function AllCustomers() {
   useEffect(() => {
     if (isDataUpdated) requestUpdateCustomer();
   }, [updatedData]);
+  // teste
 
   const filterCustomers = (arrayOfCustomers: Customer[]) => {
     const array = arrayOfCustomers.filter((customer) => customer.customer_name.toLowerCase()
